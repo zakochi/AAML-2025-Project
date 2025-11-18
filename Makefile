@@ -48,6 +48,6 @@ DEFINES += SILENT_FIRMWARE
 #DEFINES += INCLUDE_ALL_TFLM_EXAMPLES
 
 # Uncomment this line to include the ASCII animated donut demo.
-DEFINES += DONUT_DEMO
+# DEFINES += DONUT_DEMO
 
 include ../proj.mk

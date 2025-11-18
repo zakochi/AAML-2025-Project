@@ -5,7 +5,6 @@
 extern "C" {
 #endif
 
-// For integration into menu system
 void wav2letter_pruned_menu();
 
 #ifdef __cplusplus

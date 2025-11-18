@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
     # --- Connect to Serial ---
     try:
-        com = serial.Serial(args.port, args.baud, timeout=900) # 15-minute timeout
+        com = serial.Serial(args.port, args.baud)
         print(f"Connected to {args.port} at {args.baud} baud.")
     except Exception as e:
         print(f"Error: Could not open serial port {args.port}. {e}")
@@ -164,7 +164,7 @@ if __name__ == '__main__':
             com.write(infer_cmd.encode())
             
                 
-            print(f"\n... Inference for '{testcase.filename}' running (will print dots):")
+            print(f"\n... Inference for '{testcase.filename}' running:")
             msg_buffer_bytes = b''
             while True:
                 byte_char = com.read(1)
@@ -172,10 +172,9 @@ if __name__ == '__main__':
                     print("\nError: Read timed out during inference!")
                     msg = msg_buffer_bytes.decode('utf-8', 'ignore')
                     break
-                try:
+                if byte_char == b'.':
                     print(byte_char.decode('utf-8', 'ignore'), end='', flush=True)
-                except:
-                    pass
+                    
                 msg_buffer_bytes += byte_char
                 if msg_buffer_bytes.endswith(READY_MSG.encode()):
                     msg = msg_buffer_bytes.decode('utf-8', 'ignore')
@@ -214,8 +213,7 @@ if __name__ == '__main__':
         avg_latency = results['total_latency_ms'] / num_tests
         
         # Calculate final Word Error Rate (WER)
-        error_metrics = jiwer.compute_measures(all_truth, all_preds)
-        wer = error_metrics['wer']
+        wer = jiwer.wer(all_truth, all_preds)
 
         print("\n--- Evaluation Complete ---")
         print(f"Total Inferences: {num_tests}")

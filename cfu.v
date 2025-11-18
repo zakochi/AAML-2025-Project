@@ -38,11 +38,11 @@ module Cfu (
       rsp_valid <= ~rsp_ready;
     end else if (cmd_valid) begin
       rsp_valid <= 1'b1;
-      if (cmd_payload_function_id[9:3] == FUNC_ID_ADD) begin
+      if (cmd_payload_function_id[9:0] == FUNC_ID_ADD) begin 
         rsp_payload_outputs_0 <= rsp_payload_outputs_0 + sum_prods;
-      end else if (cmd_payload_function_id[9:3] == FUNC_ID_RESET) begin
+      end else if (cmd_payload_function_id[9:0] == FUNC_ID_RESET) begin 
         rsp_payload_outputs_0 <= 32'b0;
-      end else if (cmd_payload_function_id[9:3] == FUNC_ID_SET_OFFSET) begin
+      end else if (cmd_payload_function_id[9:0] == FUNC_ID_SET_OFFSET) begin 
         input_offset <= cmd_payload_inputs_0[8:0];
       end
     end
