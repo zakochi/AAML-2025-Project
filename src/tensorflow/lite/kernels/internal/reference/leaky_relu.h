@@ -33,7 +33,6 @@ inline uint32_t PackInt8(uint8_t v0, uint8_t v1, uint8_t v2, uint8_t v3) {
 
 inline unsigned int read_cycles() {
     unsigned int cycles;
-    // 使用 rdcycle 讀取機器週期計數器
     asm volatile ("rdcycle %0" : "=r" (cycles));
     return cycles;
 }
