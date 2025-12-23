@@ -37,7 +37,6 @@ inline uint32_t PackInt8(uint8_t v0, uint8_t v1, uint8_t v2, uint8_t v3) {
 
 inline unsigned int read_cycles() {
     unsigned int cycles;
-    // 使用 rdcycle 讀取機器週期計數器
     asm volatile ("rdcycle %0" : "=r" (cycles));
     return cycles;
 }
@@ -116,7 +115,7 @@ inline void ConvPerChannel(
          
           cfu_op(0,10,m_size,0);
 
-          // 1. Weight Loading
+          // Weight Loading
           for(int32_t m_tile = 0; m_tile < m_size; m_tile+=T){
               int32_t new_rest = m_rest - m_tile;
               int32_t new_row = row + m_tile;
