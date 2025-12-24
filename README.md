@@ -18,4 +18,6 @@ $ chmod +x model_convert.sh
 $ ./model_convert.sh
 ```
 ### Conduct
+```bash
 make prog && make load
+```
