@@ -16,3 +16,6 @@ Then convert the tflite file into a header file:
 ```bash
 $ chmod +x model_convert.sh
 $ ./model_convert.sh
+
+### Conduct
+make prog && make load
